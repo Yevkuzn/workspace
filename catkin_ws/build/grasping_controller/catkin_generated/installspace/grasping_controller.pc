@@ -1,0 +1,8 @@
+prefix=/home/yk/catkin_ws/install
+
+Name: grasping_controller
+Description: Description of grasping_controller
+Version: 0.0.0
+Cflags: -I/home/yk/catkin_ws/install/include
+Libs: -L/home/yk/catkin_ws/install/lib 
+Requires: 

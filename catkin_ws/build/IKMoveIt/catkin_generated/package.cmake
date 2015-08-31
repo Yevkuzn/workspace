@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "ikmoveit")
+set(ikmoveit_MAINTAINER "yk <yk@todo.todo>")
+set(ikmoveit_DEPRECATED "")
+set(ikmoveit_VERSION "0.0.0")
+set(ikmoveit_BUILD_DEPENDS "roscpp" "std_msgs")
+set(ikmoveit_RUN_DEPENDS "roscpp" "std_msgs")
+set(ikmoveit_BUILDTOOL_DEPENDS "catkin")

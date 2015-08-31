@@ -1,0 +1,8 @@
+prefix=/home/yk/catkin_ws/devel
+
+Name: wsg_50_common
+Description: Description of wsg_50_common
+Version: 0.0.0
+Cflags: -I/home/yk/catkin_ws/devel/include
+Libs: -L/home/yk/catkin_ws/devel/lib 
+Requires: message_runtime std_msgs

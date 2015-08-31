@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "wsg_50_simulation")
+set(wsg_50_simulation_MAINTAINER "nalt <nalt@todo.todo>")
+set(wsg_50_simulation_DEPRECATED "")
+set(wsg_50_simulation_VERSION "0.0.0")
+set(wsg_50_simulation_BUILD_DEPENDS "roscpp" "std_msgs" "std_srvs" "wsg_50_common" "urdf")
+set(wsg_50_simulation_RUN_DEPENDS "roscpp" "urdf" "std_msgs" "std_srvs" "wsg_50_common" "pr2_controller_manager" "gazebo_ros")
+set(wsg_50_simulation_BUILDTOOL_DEPENDS "catkin")

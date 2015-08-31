@@ -1,0 +1,20 @@
+(cl:defpackage grasping_controller-srv
+  (:use )
+  (:export
+   "MAKEIK"
+   "<MAKEIK-REQUEST>"
+   "MAKEIK-REQUEST"
+   "<MAKEIK-RESPONSE>"
+   "MAKEIK-RESPONSE"
+   "MOVEIRB120"
+   "<MOVEIRB120-REQUEST>"
+   "MOVEIRB120-REQUEST"
+   "<MOVEIRB120-RESPONSE>"
+   "MOVEIRB120-RESPONSE"
+   "MOVEALL"
+   "<MOVEALL-REQUEST>"
+   "MOVEALL-REQUEST"
+   "<MOVEALL-RESPONSE>"
+   "MOVEALL-RESPONSE"
+  ))
+

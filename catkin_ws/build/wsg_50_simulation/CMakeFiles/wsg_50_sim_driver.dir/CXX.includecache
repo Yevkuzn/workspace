@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yk/catkin_ws/src/wsg_50_simulation/src/wsg_50_sim_driver.cpp
+ros/ros.h
+-
+wsg_50_common/Move.h
+-
+wsg_50_common/Incr.h
+-
+std_msgs/Float64.h
+-
+std_srvs/Empty.h
+-
+

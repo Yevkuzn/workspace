@@ -1,0 +1,11 @@
+<launch>
+<include file="$(find abb_irb120_support)/launch/load_irb120.launch"/>
+<include file="$(find abb_irb120_support)/launch/robot_interface_download_irb120.launch">
+	<arg name="robot_ip" value="137.226.188.158" />
+</include>
+<include file="$(find wsg_50)/launch/wsg_50_tcp.launch"/>
+<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+<node pkg="grasping_controller" type="IK_service" name="IK_service" />
+<node pkg="grasping_controller" type="move_irb120" name="move_irb120" />
+<node pkg="grasping_controller" type="main_service" name="main_service" />
+</launch>

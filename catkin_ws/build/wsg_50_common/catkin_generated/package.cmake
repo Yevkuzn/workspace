@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "wsg_50_common")
+set(wsg_50_common_MAINTAINER "nalt <nalt@todo.todo>")
+set(wsg_50_common_DEPRECATED "")
+set(wsg_50_common_VERSION "0.0.0")
+set(wsg_50_common_BUILD_DEPENDS "message_generation" "std_msgs")
+set(wsg_50_common_RUN_DEPENDS "message_runtime" "std_msgs")
+set(wsg_50_common_BUILDTOOL_DEPENDS "catkin")

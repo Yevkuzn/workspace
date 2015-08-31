@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "test_movement")
+set(test_movement_MAINTAINER "yk <yk@todo.todo>")
+set(test_movement_DEPRECATED "")
+set(test_movement_VERSION "0.0.0")
+set(test_movement_BUILD_DEPENDS "actionlib" "control_msgs" "roscpp" "trajectory_msgs")
+set(test_movement_RUN_DEPENDS "actionlib" "control_msgs" "roscpp" "trajectory_msgs")
+set(test_movement_BUILDTOOL_DEPENDS "catkin")

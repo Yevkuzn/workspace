@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yk/catkin_ws/src/wsg_50_simulation/src/wsg_50_keyboard_teleop.cpp
+termios.h
+-
+signal.h
+-
+math.h
+-
+stdio.h
+-
+stdlib.h
+-
+ros/ros.h
+-
+std_msgs/Float64.h
+-
+
