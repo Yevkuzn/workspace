@@ -8,14 +8,17 @@
 #include "grasping_controller/MakeIK.h"
 
 bool getIK(grasping_controller::MakeIK::Request  &req,
-         grasping_controller::MakeIK::Response &res)
+         grasping_controller::MakeIK::Response &res) //advertised service
 {
     //TODO: calculate transformation
+    //load robot model from robot description topic
     robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
     robot_model::RobotModelPtr kinematic_model = robot_model_loader.getModel();
-    ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str());
+    ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str()); //useless string
+    //get robot state pointer and set it to default?? for some reason it was in the example 
     robot_state::RobotStatePtr kinematic_state(new robot_state::RobotState(kinematic_model));
     kinematic_state->setToDefaultValues();
+    //create Pose object using values from request (req)
     geometry_msgs::Point pos;
     pos.x = req.x_obj;
     pos.y = req.y_obj;
@@ -29,9 +32,10 @@ bool getIK(grasping_controller::MakeIK::Request  &req,
     end_effector_state.position = pos;
     end_effector_state.orientation = qua;
     std::vector<double> joint_values;
+    //gets movement constraints from MoveIT and asks MoveIT to execute IK 
     const moveit::core::JointModelGroup* joint_model_group = kinematic_model->getJointModelGroup("manipulator");
     bool found_ik = kinematic_state->setFromIK(joint_model_group, end_effector_state, 10, 0.1);
-
+    //assign array for joint values if IK solution found
     if(found_ik)
     {
         kinematic_state->copyJointGroupPositions(joint_model_group, joint_values);
@@ -54,6 +58,7 @@ bool getIK(grasping_controller::MakeIK::Request  &req,
 
 int main(int argc, char **argv)
 {
+  //nothing special, some routine for node launching and service advertisement
   ros::init(argc, argv, "IK_service");
   ros::NodeHandle n;
 
