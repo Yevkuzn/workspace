@@ -7,6 +7,8 @@
 bool processAndMove(grasping_controller::MoveAll::Request  &req,
          grasping_controller::MoveAll::Response &res)
 {
+    //service for comunicating with other services
+    //creating IK request
     grasping_controller::MakeIK::Request  IKReq;
     grasping_controller::MakeIK::Response IKRes;
     IKReq.x_obj = req.x_obj;
@@ -23,8 +25,9 @@ bool processAndMove(grasping_controller::MoveAll::Request  &req,
     IKReq.yr_gripper = req.yr_gripper;
     IKReq.zr_gripper = req.zr_gripper;
     IKReq.w_gripper = req.w_gripper;
-    if (ros::service::call("IK_service", IKReq, IKRes))
+    if (ros::service::call("IK_service", IKReq, IKRes)) //calling IK service
     {
+        //creating request for moving IRB
         grasping_controller::MoveIRB120::Request  MoveReq;
         grasping_controller::MoveIRB120::Response MoveRes;
         MoveReq.joint_1 = IKRes.joint_1;
@@ -33,13 +36,14 @@ bool processAndMove(grasping_controller::MoveAll::Request  &req,
         MoveReq.joint_4 = IKRes.joint_4;
         MoveReq.joint_5 = IKRes.joint_5;
         MoveReq.joint_6 = IKRes.joint_6;
-        if (ros::service::call("move_irb120", MoveReq, MoveRes))
+        if (ros::service::call("move_irb120", MoveReq, MoveRes)) //calling move_irb service
         {
+            //request for grasping
             wsg_50_common::Move::Request WSGReq;
             WSGReq.width = req.width;
-            WSGReq.speed = 10.0;
+            WSGReq.speed = 10.0; //default gripper velocity, may be changed
             wsg_50_common::Move::Response WSGRes;
-            if (ros::service::call("wsg_50/grasp", WSGReq, WSGRes))
+            if (ros::service::call("wsg_50/grasp", WSGReq, WSGRes)) //calling grasping service
             {
                 ROS_INFO("Error %d\n", WSGRes.error);
                 res.error_code = 0;
@@ -55,9 +59,10 @@ bool processAndMove(grasping_controller::MoveAll::Request  &req,
 
 int main(int argc, char **argv)
 {
+  //ros routine
   ros::init(argc, argv, "main_service");
   ros::NodeHandle n;
-
+  //advertising service
   ros::ServiceServer service = n.advertiseService("main_service", processAndMove);
   ROS_INFO("Waiting for transformations");
   ros::spin();
