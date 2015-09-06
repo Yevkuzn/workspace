@@ -4,6 +4,10 @@
 #include <actionlib/client/simple_action_client.h>
 #include "grasping_controller/MoveIRB120.h"
 
+
+//class is almost copied from
+//http://wiki.ros.org/pr2_controllers/Tutorials/Moving%20the%20arm%20using%20the%20Joint%20Trajectory%20Action
+
 typedef actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction > TrajClient;
 
 class RobotArm
@@ -33,15 +37,17 @@ public:
 
   control_msgs::FollowJointTrajectoryGoal armExtensionTrajectory(grasping_controller::MoveIRB120::Request  &req)
   {
+    //create trajectory from 0 0 0 0 0 0 and goal, further in this method goal is considered as whole trajectory
     control_msgs::FollowJointTrajectoryGoal goal;
-
+    //assign joint names
     goal.trajectory.joint_names.push_back("joint_1");
     goal.trajectory.joint_names.push_back("joint_2");
     goal.trajectory.joint_names.push_back("joint_3");
     goal.trajectory.joint_names.push_back("joint_4");
     goal.trajectory.joint_names.push_back("joint_5");
     goal.trajectory.joint_names.push_back("joint_6");
-
+    
+    //create 2 trajectory points (1 point - 6 position and velocity values)
     goal.trajectory.points.resize(2);
 
     int ind = 0;
@@ -55,15 +61,15 @@ public:
     goal.trajectory.points[ind].positions[5] = 0;
 
 
-
+    //default velocities
     goal.trajectory.points[ind].velocities.resize(6);
     for (size_t j = 0; j < 6; ++j)
     {
       goal.trajectory.points[ind].velocities[j] = 0.0;
     }
-
+    //duration untill moving to the first point, seems to be in seconds, try to make it smaller
     goal.trajectory.points[ind].time_from_start = ros::Duration(10.0);
-
+    //second point
     ind += 1;
     goal.trajectory.points[ind].positions.resize(6);
     goal.trajectory.points[ind].positions[0] = req.joint_1;
@@ -94,9 +100,11 @@ public:
 bool move(grasping_controller::MoveIRB120::Request  &req,
          grasping_controller::MoveIRB120::Response &res)
 {
-
+    //service for moving irb
     RobotArm arm;
+    //executing trajectory consisting of 0 0 0 0 0 0 and goal positions
     arm.startTrajectory(arm.armExtensionTrajectory(req));
+    //wait till the end of the execution
     while(!arm.getState().isDone() && ros::ok())
     {
         usleep(50000);
@@ -107,9 +115,10 @@ bool move(grasping_controller::MoveIRB120::Request  &req,
 
 int main(int argc, char **argv)
 {
+  //ros routine
   ros::init(argc, argv, "move_irb120");
   ros::NodeHandle n;
-
+  //advertising service
   ros::ServiceServer service = n.advertiseService("move_irb120", move);
   ROS_INFO("Waiting for DoF values");
   ros::spin();
