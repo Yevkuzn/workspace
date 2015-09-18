@@ -6,6 +6,7 @@
 #include "geometry_msgs/Pose.h"
 #include "vector"
 #include "grasping_controller/MakeIK.h"
+#include <tf/transform_datatypes.h>
 
 bool getIK(grasping_controller::MakeIK::Request  &req,
          grasping_controller::MakeIK::Response &res) //advertised service
@@ -24,10 +25,7 @@ bool getIK(grasping_controller::MakeIK::Request  &req,
     pos.y = req.y_obj;
     pos.z = req.z_obj;
     geometry_msgs::Quaternion qua;
-    qua.x = req.xr_obj;
-    qua.y = req.yr_obj;
-    qua.z = req.zr_obj;
-    qua.w = req.w_obj;
+    qua = tf::createQuaternionMsgFromRollPitchYaw(req.xr_obj, req.yr_obj, req.zr_obj);
     geometry_msgs::Pose end_effector_state;
     end_effector_state.position = pos;
     end_effector_state.orientation = qua;
