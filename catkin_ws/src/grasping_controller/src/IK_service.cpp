@@ -7,43 +7,66 @@
 #include "vector"
 #include "grasping_controller/MakeIK.h"
 #include <tf/transform_datatypes.h>
+#include <Eigen/Dense>
+#include <Eigen/Geometry>
+#include <stdio.h>
+
+using namespace Eigen;
 
 bool getIK(grasping_controller::MakeIK::Request  &req,
-         grasping_controller::MakeIK::Response &res) //advertised service
+         grasping_controller::MakeIK::Response &res)
 {
-    //TODO: calculate transformation
-    //load robot model from robot description topic
+    Vector3f axis;
+    std::vector<float> bl_to_obj_message, obj_to_gripper_message;
+    bl_to_obj_message = req.bl_to_obj_matr;
+    obj_to_gripper_message = req.obj_to_gripper_aa_vector;
+    Map<Matrix<float, 4, 4, RowMajor> > bl_to_obj(bl_to_obj_message.data(), 4, 4);
+    std::cout << bl_to_obj << std::endl;  //debug only
+    ROS_INFO("asdasdasd");
+    axis[0] = sin(obj_to_gripper_message[3]) * cos(obj_to_gripper_message[4]);
+    axis[1] = sin(obj_to_gripper_message[3]) * sin(obj_to_gripper_message[4]);
+    axis[2] = cos(obj_to_gripper_message[3]);
+    Matrix3f tensor = axis * axis.transpose();
+    Matrix3f cross;
+    cross << 0, -axis(2), axis(1), axis(2), 0, -axis(0), -axis(1), axis(0), 0;
+    Matrix3f obj_to_gripper_rotation = cos(obj_to_gripper_message[5]) * Matrix3f::Identity() +
+        sin(obj_to_gripper_message[5]) * cross + (1 - cos(obj_to_gripper_message[5])) * tensor;
+    Matrix4f obj_to_gripper;
+    Affine3f r(obj_to_gripper_rotation);
+    Affine3f t(Translation3f(Vector3f(obj_to_gripper_message[0], obj_to_gripper_message[1],
+                                       obj_to_gripper_message[2])));
+    obj_to_gripper = (t * r).matrix();
+    std::cout << obj_to_gripper << std::endl;  //for debug only
+    Matrix4f full_transform = bl_to_obj * obj_to_gripper;
+    std::cout << full_transform << std::endl;  //for debug only
+    Quaternionf quat(obj_to_gripper.block<3,3>(0,0));
     robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
     robot_model::RobotModelPtr kinematic_model = robot_model_loader.getModel();
-    ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str()); //useless string
-    //get robot state pointer and set it to default?? for some reason it was in the example 
+    ROS_INFO("Model frame: %s", kinematic_model->getModelFrame().c_str());
     robot_state::RobotStatePtr kinematic_state(new robot_state::RobotState(kinematic_model));
     kinematic_state->setToDefaultValues();
-    //create Pose object using values from request (req)
     geometry_msgs::Point pos;
-    pos.x = req.x_obj;
-    pos.y = req.y_obj;
-    pos.z = req.z_obj;
+    pos.x = full_transform(0, 3);
+    pos.y = full_transform(1, 3);
+    pos.z = full_transform(2, 3);
     geometry_msgs::Quaternion qua;
-    qua = tf::createQuaternionMsgFromRollPitchYaw(req.xr_obj, req.yr_obj, req.zr_obj);
+    qua.x = quat.x();
+    qua.y = quat.y();
+    qua.z = quat.z();
+    qua.w = quat.w();
     geometry_msgs::Pose end_effector_state;
     end_effector_state.position = pos;
     end_effector_state.orientation = qua;
     std::vector<double> joint_values;
-    //gets movement constraints from MoveIT and asks MoveIT to execute IK 
     const moveit::core::JointModelGroup* joint_model_group = kinematic_model->getJointModelGroup("manipulator");
     bool found_ik = kinematic_state->setFromIK(joint_model_group, end_effector_state, 10, 0.1);
-    //assign array for joint values if IK solution found
+
     if(found_ik)
     {
         kinematic_state->copyJointGroupPositions(joint_model_group, joint_values);
         ROS_INFO("Found solution\n");
-        res.joint_1 = joint_values[0];
-        res.joint_2 = joint_values[1];
-        res.joint_3 = joint_values[2];
-        res.joint_4 = joint_values[3];
-        res.joint_5 = joint_values[4];
-        res.joint_6 = joint_values[5];
+        for (int i = 0; i < 6; i++)
+            res.joint_values.push_back(joint_values[i]);
         return true;
     }
     else
@@ -56,7 +79,6 @@ bool getIK(grasping_controller::MakeIK::Request  &req,
 
 int main(int argc, char **argv)
 {
-  //nothing special, some routine for node launching and service advertisement
   ros::init(argc, argv, "IK_service");
   ros::NodeHandle n;
 

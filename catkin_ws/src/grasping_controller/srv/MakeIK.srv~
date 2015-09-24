@@ -1,16 +1,4 @@
-float64 x_obj
-float64 y_obj
-float64 z_obj
-float64 xr_obj
-float64 yr_obj
-float64 zr_obj
-float64 w_obj
-float64 x_gripper
-float64 y_gripper
-float64 z_gripper
-float64 xr_gripper
-float64 yr_gripper
-float64 zr_gripper
-float64 w_gripper
+float64[] bl_to_obj_matr
+float64[] obj_to_gripper_aa_vector
 ---
-int64 error_code
+float64[] joint_values

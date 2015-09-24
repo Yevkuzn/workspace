@@ -73,7 +73,7 @@ template<>
 struct MD5Sum< ::grasping_controller::MoveAll > {
   static const char* value()
   {
-    return "f78f45f7e98b195bdcd2e68ec6a6f693";
+    return "073c3e3dacd545cf3b5e9c386b6d1216";
   }
 
   static const char* value(const ::grasping_controller::MoveAll&) { return value(); }

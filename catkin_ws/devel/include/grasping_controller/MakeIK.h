@@ -73,7 +73,7 @@ template<>
 struct MD5Sum< ::grasping_controller::MakeIK > {
   static const char* value()
   {
-    return "899191b7022e78e02644dabd0dd8dee3";
+    return "2edeaa07c169ce52eee0f703d664756e";
   }
 
   static const char* value(const ::grasping_controller::MakeIK&) { return value(); }

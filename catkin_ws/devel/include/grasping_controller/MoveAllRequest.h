@@ -57,85 +57,25 @@ struct MoveAllRequest_
   typedef MoveAllRequest_<ContainerAllocator> Type;
 
   MoveAllRequest_()
-    : x_obj(0.0)
-    , y_obj(0.0)
-    , z_obj(0.0)
-    , xr_obj(0.0)
-    , yr_obj(0.0)
-    , zr_obj(0.0)
-    , w_obj(0.0)
-    , x_gripper(0.0)
-    , y_gripper(0.0)
-    , z_gripper(0.0)
-    , xr_gripper(0.0)
-    , yr_gripper(0.0)
-    , zr_gripper(0.0)
-    , w_gripper(0.0)
+    : bl_to_obj_matr()
+    , obj_to_gripper_aa_vector()
     , width(0.0)  {
     }
   MoveAllRequest_(const ContainerAllocator& _alloc)
-    : x_obj(0.0)
-    , y_obj(0.0)
-    , z_obj(0.0)
-    , xr_obj(0.0)
-    , yr_obj(0.0)
-    , zr_obj(0.0)
-    , w_obj(0.0)
-    , x_gripper(0.0)
-    , y_gripper(0.0)
-    , z_gripper(0.0)
-    , xr_gripper(0.0)
-    , yr_gripper(0.0)
-    , zr_gripper(0.0)
-    , w_gripper(0.0)
+    : bl_to_obj_matr(_alloc)
+    , obj_to_gripper_aa_vector(_alloc)
     , width(0.0)  {
     }
 
 
 
-   typedef double _x_obj_type;
-  _x_obj_type x_obj;
+   typedef std::vector<float, typename ContainerAllocator::template rebind<float>::other >  _bl_to_obj_matr_type;
+  _bl_to_obj_matr_type bl_to_obj_matr;
 
-   typedef double _y_obj_type;
-  _y_obj_type y_obj;
+   typedef std::vector<float, typename ContainerAllocator::template rebind<float>::other >  _obj_to_gripper_aa_vector_type;
+  _obj_to_gripper_aa_vector_type obj_to_gripper_aa_vector;
 
-   typedef double _z_obj_type;
-  _z_obj_type z_obj;
-
-   typedef double _xr_obj_type;
-  _xr_obj_type xr_obj;
-
-   typedef double _yr_obj_type;
-  _yr_obj_type yr_obj;
-
-   typedef double _zr_obj_type;
-  _zr_obj_type zr_obj;
-
-   typedef double _w_obj_type;
-  _w_obj_type w_obj;
-
-   typedef double _x_gripper_type;
-  _x_gripper_type x_gripper;
-
-   typedef double _y_gripper_type;
-  _y_gripper_type y_gripper;
-
-   typedef double _z_gripper_type;
-  _z_gripper_type z_gripper;
-
-   typedef double _xr_gripper_type;
-  _xr_gripper_type xr_gripper;
-
-   typedef double _yr_gripper_type;
-  _yr_gripper_type yr_gripper;
-
-   typedef double _zr_gripper_type;
-  _zr_gripper_type zr_gripper;
-
-   typedef double _w_gripper_type;
-  _w_gripper_type w_gripper;
-
-   typedef double _width_type;
+   typedef float _width_type;
   _width_type width;
 
 
@@ -172,7 +112,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/opt/ros/hydro/share/std_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/hydro/share/geometry_msgs/cmake/../msg'], 'actionlib_msgs': ['/opt/ros/hydro/share/actionlib_msgs/cmake/../msg'], 'trajectory_msgs': ['/opt/ros/hydro/share/trajectory_msgs/cmake/../msg'], 'control_msgs': ['/opt/ros/hydro/share/control_msgs/cmake/../msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -182,12 +122,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::grasping_controller::MoveAllRequest_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::grasping_controller::MoveAllRequest_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -216,12 +156,12 @@ struct MD5Sum< ::grasping_controller::MoveAllRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "fa1904af03e492d0d9164b91521e251f";
+    return "205a1a2d8ed89834184a66844e5e6948";
   }
 
   static const char* value(const ::grasping_controller::MoveAllRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xfa1904af03e492d0ULL;
-  static const uint64_t static_value2 = 0xd9164b91521e251fULL;
+  static const uint64_t static_value1 = 0x205a1a2d8ed89834ULL;
+  static const uint64_t static_value2 = 0x184a66844e5e6948ULL;
 };
 
 template<class ContainerAllocator>
@@ -240,21 +180,9 @@ struct Definition< ::grasping_controller::MoveAllRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float64 x_obj\n\
-float64 y_obj\n\
-float64 z_obj\n\
-float64 xr_obj\n\
-float64 yr_obj\n\
-float64 zr_obj\n\
-float64 w_obj\n\
-float64 x_gripper\n\
-float64 y_gripper\n\
-float64 z_gripper\n\
-float64 xr_gripper\n\
-float64 yr_gripper\n\
-float64 zr_gripper\n\
-float64 w_gripper\n\
-float64 width\n\
+    return "float32[] bl_to_obj_matr\n\
+float32[] obj_to_gripper_aa_vector\n\
+float32 width\n\
 ";
   }
 
@@ -273,20 +201,8 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.x_obj);
-      stream.next(m.y_obj);
-      stream.next(m.z_obj);
-      stream.next(m.xr_obj);
-      stream.next(m.yr_obj);
-      stream.next(m.zr_obj);
-      stream.next(m.w_obj);
-      stream.next(m.x_gripper);
-      stream.next(m.y_gripper);
-      stream.next(m.z_gripper);
-      stream.next(m.xr_gripper);
-      stream.next(m.yr_gripper);
-      stream.next(m.zr_gripper);
-      stream.next(m.w_gripper);
+      stream.next(m.bl_to_obj_matr);
+      stream.next(m.obj_to_gripper_aa_vector);
       stream.next(m.width);
     }
 
@@ -306,36 +222,20 @@ struct Printer< ::grasping_controller::MoveAllRequest_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::grasping_controller::MoveAllRequest_<ContainerAllocator>& v)
   {
-    s << indent << "x_obj: ";
-    Printer<double>::stream(s, indent + "  ", v.x_obj);
-    s << indent << "y_obj: ";
-    Printer<double>::stream(s, indent + "  ", v.y_obj);
-    s << indent << "z_obj: ";
-    Printer<double>::stream(s, indent + "  ", v.z_obj);
-    s << indent << "xr_obj: ";
-    Printer<double>::stream(s, indent + "  ", v.xr_obj);
-    s << indent << "yr_obj: ";
-    Printer<double>::stream(s, indent + "  ", v.yr_obj);
-    s << indent << "zr_obj: ";
-    Printer<double>::stream(s, indent + "  ", v.zr_obj);
-    s << indent << "w_obj: ";
-    Printer<double>::stream(s, indent + "  ", v.w_obj);
-    s << indent << "x_gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.x_gripper);
-    s << indent << "y_gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.y_gripper);
-    s << indent << "z_gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.z_gripper);
-    s << indent << "xr_gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.xr_gripper);
-    s << indent << "yr_gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.yr_gripper);
-    s << indent << "zr_gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.zr_gripper);
-    s << indent << "w_gripper: ";
-    Printer<double>::stream(s, indent + "  ", v.w_gripper);
+    s << indent << "bl_to_obj_matr[]" << std::endl;
+    for (size_t i = 0; i < v.bl_to_obj_matr.size(); ++i)
+    {
+      s << indent << "  bl_to_obj_matr[" << i << "]: ";
+      Printer<float>::stream(s, indent + "  ", v.bl_to_obj_matr[i]);
+    }
+    s << indent << "obj_to_gripper_aa_vector[]" << std::endl;
+    for (size_t i = 0; i < v.obj_to_gripper_aa_vector.size(); ++i)
+    {
+      s << indent << "  obj_to_gripper_aa_vector[" << i << "]: ";
+      Printer<float>::stream(s, indent + "  ", v.obj_to_gripper_aa_vector[i]);
+    }
     s << indent << "width: ";
-    Printer<double>::stream(s, indent + "  ", v.width);
+    Printer<float>::stream(s, indent + "  ", v.width);
   }
 };
 

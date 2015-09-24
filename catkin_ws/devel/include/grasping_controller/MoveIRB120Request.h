@@ -57,41 +57,16 @@ struct MoveIRB120Request_
   typedef MoveIRB120Request_<ContainerAllocator> Type;
 
   MoveIRB120Request_()
-    : joint_1(0.0)
-    , joint_2(0.0)
-    , joint_3(0.0)
-    , joint_4(0.0)
-    , joint_5(0.0)
-    , joint_6(0.0)  {
+    : joint_values()  {
     }
   MoveIRB120Request_(const ContainerAllocator& _alloc)
-    : joint_1(0.0)
-    , joint_2(0.0)
-    , joint_3(0.0)
-    , joint_4(0.0)
-    , joint_5(0.0)
-    , joint_6(0.0)  {
+    : joint_values(_alloc)  {
     }
 
 
 
-   typedef double _joint_1_type;
-  _joint_1_type joint_1;
-
-   typedef double _joint_2_type;
-  _joint_2_type joint_2;
-
-   typedef double _joint_3_type;
-  _joint_3_type joint_3;
-
-   typedef double _joint_4_type;
-  _joint_4_type joint_4;
-
-   typedef double _joint_5_type;
-  _joint_5_type joint_5;
-
-   typedef double _joint_6_type;
-  _joint_6_type joint_6;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _joint_values_type;
+  _joint_values_type joint_values;
 
 
 
@@ -127,7 +102,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/opt/ros/hydro/share/std_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/hydro/share/geometry_msgs/cmake/../msg'], 'actionlib_msgs': ['/opt/ros/hydro/share/actionlib_msgs/cmake/../msg'], 'trajectory_msgs': ['/opt/ros/hydro/share/trajectory_msgs/cmake/../msg'], 'control_msgs': ['/opt/ros/hydro/share/control_msgs/cmake/../msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -137,12 +112,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::grasping_controller::MoveIRB120Request_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::grasping_controller::MoveIRB120Request_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -171,12 +146,12 @@ struct MD5Sum< ::grasping_controller::MoveIRB120Request_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "ec083468e9067c595612b436b8a4cd45";
+    return "b79b974a6ae3f399e6d798ff6613e367";
   }
 
   static const char* value(const ::grasping_controller::MoveIRB120Request_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xec083468e9067c59ULL;
-  static const uint64_t static_value2 = 0x5612b436b8a4cd45ULL;
+  static const uint64_t static_value1 = 0xb79b974a6ae3f399ULL;
+  static const uint64_t static_value2 = 0xe6d798ff6613e367ULL;
 };
 
 template<class ContainerAllocator>
@@ -195,12 +170,7 @@ struct Definition< ::grasping_controller::MoveIRB120Request_<ContainerAllocator>
 {
   static const char* value()
   {
-    return "float64 joint_1\n\
-float64 joint_2\n\
-float64 joint_3\n\
-float64 joint_4\n\
-float64 joint_5\n\
-float64 joint_6\n\
+    return "float64[] joint_values\n\
 ";
   }
 
@@ -219,12 +189,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.joint_1);
-      stream.next(m.joint_2);
-      stream.next(m.joint_3);
-      stream.next(m.joint_4);
-      stream.next(m.joint_5);
-      stream.next(m.joint_6);
+      stream.next(m.joint_values);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -243,18 +208,12 @@ struct Printer< ::grasping_controller::MoveIRB120Request_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::grasping_controller::MoveIRB120Request_<ContainerAllocator>& v)
   {
-    s << indent << "joint_1: ";
-    Printer<double>::stream(s, indent + "  ", v.joint_1);
-    s << indent << "joint_2: ";
-    Printer<double>::stream(s, indent + "  ", v.joint_2);
-    s << indent << "joint_3: ";
-    Printer<double>::stream(s, indent + "  ", v.joint_3);
-    s << indent << "joint_4: ";
-    Printer<double>::stream(s, indent + "  ", v.joint_4);
-    s << indent << "joint_5: ";
-    Printer<double>::stream(s, indent + "  ", v.joint_5);
-    s << indent << "joint_6: ";
-    Printer<double>::stream(s, indent + "  ", v.joint_6);
+    s << indent << "joint_values[]" << std::endl;
+    for (size_t i = 0; i < v.joint_values.size(); ++i)
+    {
+      s << indent << "  joint_values[" << i << "]: ";
+      Printer<double>::stream(s, indent + "  ", v.joint_values[i]);
+    }
   }
 };
 

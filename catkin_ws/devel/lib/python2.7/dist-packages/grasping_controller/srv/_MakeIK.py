@@ -6,27 +6,15 @@ import struct
 
 
 class MakeIKRequest(genpy.Message):
-  _md5sum = "2296530322c13c2206bc7350feeca923"
+  _md5sum = "1394a424a391113886cb3a5725ba9098"
   _type = "grasping_controller/MakeIKRequest"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64 x_obj
-float64 y_obj
-float64 z_obj
-float64 xr_obj
-float64 yr_obj
-float64 zr_obj
-float64 w_obj
-float64 x_gripper
-float64 y_gripper
-float64 z_gripper
-float64 xr_gripper
-float64 yr_gripper
-float64 zr_gripper
-float64 w_gripper
+  _full_text = """float32[] bl_to_obj_matr
+float32[] obj_to_gripper_aa_vector
 
 """
-  __slots__ = ['x_obj','y_obj','z_obj','xr_obj','yr_obj','zr_obj','w_obj','x_gripper','y_gripper','z_gripper','xr_gripper','yr_gripper','zr_gripper','w_gripper']
-  _slot_types = ['float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64']
+  __slots__ = ['bl_to_obj_matr','obj_to_gripper_aa_vector']
+  _slot_types = ['float32[]','float32[]']
 
   def __init__(self, *args, **kwds):
     """
@@ -36,7 +24,7 @@ float64 w_gripper
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       x_obj,y_obj,z_obj,xr_obj,yr_obj,zr_obj,w_obj,x_gripper,y_gripper,z_gripper,xr_gripper,yr_gripper,zr_gripper,w_gripper
+       bl_to_obj_matr,obj_to_gripper_aa_vector
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -45,49 +33,13 @@ float64 w_gripper
     if args or kwds:
       super(MakeIKRequest, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.x_obj is None:
-        self.x_obj = 0.
-      if self.y_obj is None:
-        self.y_obj = 0.
-      if self.z_obj is None:
-        self.z_obj = 0.
-      if self.xr_obj is None:
-        self.xr_obj = 0.
-      if self.yr_obj is None:
-        self.yr_obj = 0.
-      if self.zr_obj is None:
-        self.zr_obj = 0.
-      if self.w_obj is None:
-        self.w_obj = 0.
-      if self.x_gripper is None:
-        self.x_gripper = 0.
-      if self.y_gripper is None:
-        self.y_gripper = 0.
-      if self.z_gripper is None:
-        self.z_gripper = 0.
-      if self.xr_gripper is None:
-        self.xr_gripper = 0.
-      if self.yr_gripper is None:
-        self.yr_gripper = 0.
-      if self.zr_gripper is None:
-        self.zr_gripper = 0.
-      if self.w_gripper is None:
-        self.w_gripper = 0.
+      if self.bl_to_obj_matr is None:
+        self.bl_to_obj_matr = []
+      if self.obj_to_gripper_aa_vector is None:
+        self.obj_to_gripper_aa_vector = []
     else:
-      self.x_obj = 0.
-      self.y_obj = 0.
-      self.z_obj = 0.
-      self.xr_obj = 0.
-      self.yr_obj = 0.
-      self.zr_obj = 0.
-      self.w_obj = 0.
-      self.x_gripper = 0.
-      self.y_gripper = 0.
-      self.z_gripper = 0.
-      self.xr_gripper = 0.
-      self.yr_gripper = 0.
-      self.zr_gripper = 0.
-      self.w_gripper = 0.
+      self.bl_to_obj_matr = []
+      self.obj_to_gripper_aa_vector = []
 
   def _get_types(self):
     """
@@ -101,8 +53,14 @@ float64 w_gripper
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self
-      buff.write(_struct_14d.pack(_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper))
+      length = len(self.bl_to_obj_matr)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(struct.pack(pattern, *self.bl_to_obj_matr))
+      length = len(self.obj_to_gripper_aa_vector)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(struct.pack(pattern, *self.obj_to_gripper_aa_vector))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -113,10 +71,20 @@ float64 w_gripper
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 112
-      (_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper,) = _struct_14d.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.bl_to_obj_matr = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.obj_to_gripper_aa_vector = struct.unpack(pattern, str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -129,8 +97,14 @@ float64 w_gripper
     :param numpy: numpy python module
     """
     try:
-      _x = self
-      buff.write(_struct_14d.pack(_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper))
+      length = len(self.bl_to_obj_matr)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(self.bl_to_obj_matr.tostring())
+      length = len(self.obj_to_gripper_aa_vector)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(self.obj_to_gripper_aa_vector.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -142,16 +116,25 @@ float64 w_gripper
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 112
-      (_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper,) = _struct_14d.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.bl_to_obj_matr = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.obj_to_gripper_aa_vector = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_14d = struct.Struct("<14d")
 """autogenerated by genpy from grasping_controller/MakeIKResponse.msg. Do not edit."""
 import sys
 python3 = True if sys.hexversion > 0x03000000 else False
@@ -160,20 +143,15 @@ import struct
 
 
 class MakeIKResponse(genpy.Message):
-  _md5sum = "ec083468e9067c595612b436b8a4cd45"
+  _md5sum = "b79b974a6ae3f399e6d798ff6613e367"
   _type = "grasping_controller/MakeIKResponse"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64 joint_1
-float64 joint_2
-float64 joint_3
-float64 joint_4
-float64 joint_5
-float64 joint_6
+  _full_text = """float64[] joint_values
 
 
 """
-  __slots__ = ['joint_1','joint_2','joint_3','joint_4','joint_5','joint_6']
-  _slot_types = ['float64','float64','float64','float64','float64','float64']
+  __slots__ = ['joint_values']
+  _slot_types = ['float64[]']
 
   def __init__(self, *args, **kwds):
     """
@@ -183,7 +161,7 @@ float64 joint_6
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       joint_1,joint_2,joint_3,joint_4,joint_5,joint_6
+       joint_values
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -192,25 +170,10 @@ float64 joint_6
     if args or kwds:
       super(MakeIKResponse, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.joint_1 is None:
-        self.joint_1 = 0.
-      if self.joint_2 is None:
-        self.joint_2 = 0.
-      if self.joint_3 is None:
-        self.joint_3 = 0.
-      if self.joint_4 is None:
-        self.joint_4 = 0.
-      if self.joint_5 is None:
-        self.joint_5 = 0.
-      if self.joint_6 is None:
-        self.joint_6 = 0.
+      if self.joint_values is None:
+        self.joint_values = []
     else:
-      self.joint_1 = 0.
-      self.joint_2 = 0.
-      self.joint_3 = 0.
-      self.joint_4 = 0.
-      self.joint_5 = 0.
-      self.joint_6 = 0.
+      self.joint_values = []
 
   def _get_types(self):
     """
@@ -224,8 +187,10 @@ float64 joint_6
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self
-      buff.write(_struct_6d.pack(_x.joint_1, _x.joint_2, _x.joint_3, _x.joint_4, _x.joint_5, _x.joint_6))
+      length = len(self.joint_values)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(struct.pack(pattern, *self.joint_values))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -236,10 +201,13 @@ float64 joint_6
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 48
-      (_x.joint_1, _x.joint_2, _x.joint_3, _x.joint_4, _x.joint_5, _x.joint_6,) = _struct_6d.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.joint_values = struct.unpack(pattern, str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -252,8 +220,10 @@ float64 joint_6
     :param numpy: numpy python module
     """
     try:
-      _x = self
-      buff.write(_struct_6d.pack(_x.joint_1, _x.joint_2, _x.joint_3, _x.joint_4, _x.joint_5, _x.joint_6))
+      length = len(self.joint_values)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(self.joint_values.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -265,18 +235,20 @@ float64 joint_6
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 48
-      (_x.joint_1, _x.joint_2, _x.joint_3, _x.joint_4, _x.joint_5, _x.joint_6,) = _struct_6d.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.joint_values = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_6d = struct.Struct("<6d")
 class MakeIK(object):
   _type          = 'grasping_controller/MakeIK'
-  _md5sum = '899191b7022e78e02644dabd0dd8dee3'
+  _md5sum = '2edeaa07c169ce52eee0f703d664756e'
   _request_class  = MakeIKRequest
   _response_class = MakeIKResponse

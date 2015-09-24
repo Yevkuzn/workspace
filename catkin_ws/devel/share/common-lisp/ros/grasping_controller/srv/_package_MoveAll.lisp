@@ -1,32 +1,8 @@
 (cl:in-package grasping_controller-srv)
-(cl:export '(X_OBJ-VAL
-          X_OBJ
-          Y_OBJ-VAL
-          Y_OBJ
-          Z_OBJ-VAL
-          Z_OBJ
-          XR_OBJ-VAL
-          XR_OBJ
-          YR_OBJ-VAL
-          YR_OBJ
-          ZR_OBJ-VAL
-          ZR_OBJ
-          W_OBJ-VAL
-          W_OBJ
-          X_GRIPPER-VAL
-          X_GRIPPER
-          Y_GRIPPER-VAL
-          Y_GRIPPER
-          Z_GRIPPER-VAL
-          Z_GRIPPER
-          XR_GRIPPER-VAL
-          XR_GRIPPER
-          YR_GRIPPER-VAL
-          YR_GRIPPER
-          ZR_GRIPPER-VAL
-          ZR_GRIPPER
-          W_GRIPPER-VAL
-          W_GRIPPER
+(cl:export '(BL_TO_OBJ_MATR-VAL
+          BL_TO_OBJ_MATR
+          OBJ_TO_GRIPPER_AA_VECTOR-VAL
+          OBJ_TO_GRIPPER_AA_VECTOR
           WIDTH-VAL
           WIDTH
           ERROR_CODE-VAL

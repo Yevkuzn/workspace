@@ -407,8 +407,8 @@ clean: wsg_50_common/CMakeFiles/wsg_50_common_gencpp.dir/clean
 
 # All Build rule for target.
 wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/all: wsg_50_common/CMakeFiles/wsg_50_common_generate_messages_cpp.dir/all
-wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/all: wsg_50_common/CMakeFiles/wsg_50_common_generate_messages_py.dir/all
 wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/all: wsg_50_common/CMakeFiles/wsg_50_common_generate_messages_lisp.dir/all
+wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/all: wsg_50_common/CMakeFiles/wsg_50_common_generate_messages_py.dir/all
 	$(MAKE) -f wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/build.make wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/depend
 	$(MAKE) -f wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/build.make wsg_50_common/CMakeFiles/wsg_50_common_generate_messages.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/yk/catkin_ws/build/CMakeFiles 
@@ -1006,30 +1006,30 @@ clean: test_movement/CMakeFiles/geometry_msgs_generate_messages_py.dir/clean
 # Target rules for target test_movement/CMakeFiles/move.dir
 
 # All Build rule for target.
-test_movement/CMakeFiles/move.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
-test_movement/CMakeFiles/move.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_py.dir/all
-test_movement/CMakeFiles/move.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/roscpp_generate_messages_py.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_generate_messages_cpp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_cpp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_generate_messages_py.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all
 test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_generate_messages_cpp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_py.dir/all
+test_movement/CMakeFiles/move.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_py.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_generate_messages_lisp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+test_movement/CMakeFiles/move.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+test_movement/CMakeFiles/move.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_generate_messages_py.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all
 test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/actionlib_msgs_generate_messages_py.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_lisp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/roscpp_generate_messages_py.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_cpp.dir/all
+test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/roscpp_generate_messages_lisp.dir/all
 test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_lisp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/roscpp_generate_messages_cpp.dir/all
 test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
 test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_py.dir/all
-test_movement/CMakeFiles/move.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_py.dir/all
 	$(MAKE) -f test_movement/CMakeFiles/move.dir/build.make test_movement/CMakeFiles/move.dir/depend
 	$(MAKE) -f test_movement/CMakeFiles/move.dir/build.make test_movement/CMakeFiles/move.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/yk/catkin_ws/build/CMakeFiles  18
@@ -1489,8 +1489,8 @@ clean: grasping_controller/CMakeFiles/grasping_controller_gencpp.dir/clean
 
 # All Build rule for target.
 grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/all: grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/all
-grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/all: grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/all: grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/all
+grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/all: grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/all
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/depend
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/yk/catkin_ws/build/CMakeFiles 
@@ -1526,8 +1526,8 @@ clean: grasping_controller/CMakeFiles/grasping_controller_generate_messages.dir/
 
 # All Build rule for target.
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
-grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_cpp.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/all
+grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_cpp.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/depend
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.dir/build
@@ -1559,10 +1559,10 @@ clean: grasping_controller/CMakeFiles/grasping_controller_generate_messages_cpp.
 # Target rules for target grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir
 
 # All Build rule for target.
-grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/all
-grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
+grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_lisp.dir/all
+grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/depend
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/yk/catkin_ws/build/CMakeFiles  7 8 9
@@ -1593,10 +1593,10 @@ clean: grasping_controller/CMakeFiles/grasping_controller_generate_messages_lisp
 # Target rules for target grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir
 
 # All Build rule for target.
+grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_py.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/all: wsg_50_common/CMakeFiles/std_msgs_generate_messages_py.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/all: test_movement/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/all: test_movement/CMakeFiles/control_msgs_generate_messages_py.dir/all
-grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/all: test_movement/CMakeFiles/trajectory_msgs_generate_messages_py.dir/all
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/depend
 	$(MAKE) -f grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/build.make grasping_controller/CMakeFiles/grasping_controller_generate_messages_py.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/yk/catkin_ws/build/CMakeFiles  10 11 12 13

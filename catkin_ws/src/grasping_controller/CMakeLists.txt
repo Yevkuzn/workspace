@@ -4,6 +4,7 @@ project(grasping_controller)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+find_package(cmake_modules REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   actionlib
   control_msgs
@@ -14,6 +15,8 @@ find_package(catkin REQUIRED COMPONENTS
   trajectory_msgs
   message_generation
 )
+
+find_package(Eigen REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -100,7 +103,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
-  ${catkin_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS} ${EIGEN_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library

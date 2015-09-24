@@ -1,0 +1,5 @@
+float64[] bl_to_obj_matr
+float64[] obj_to_gripper_aa_vector
+float64 width
+---
+int64 error_code

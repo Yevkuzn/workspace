@@ -6,28 +6,16 @@ import struct
 
 
 class MoveAllRequest(genpy.Message):
-  _md5sum = "fa1904af03e492d0d9164b91521e251f"
+  _md5sum = "205a1a2d8ed89834184a66844e5e6948"
   _type = "grasping_controller/MoveAllRequest"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64 x_obj
-float64 y_obj
-float64 z_obj
-float64 xr_obj
-float64 yr_obj
-float64 zr_obj
-float64 w_obj
-float64 x_gripper
-float64 y_gripper
-float64 z_gripper
-float64 xr_gripper
-float64 yr_gripper
-float64 zr_gripper
-float64 w_gripper
-float64 width
+  _full_text = """float32[] bl_to_obj_matr
+float32[] obj_to_gripper_aa_vector
+float32 width
 
 """
-  __slots__ = ['x_obj','y_obj','z_obj','xr_obj','yr_obj','zr_obj','w_obj','x_gripper','y_gripper','z_gripper','xr_gripper','yr_gripper','zr_gripper','w_gripper','width']
-  _slot_types = ['float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64','float64']
+  __slots__ = ['bl_to_obj_matr','obj_to_gripper_aa_vector','width']
+  _slot_types = ['float32[]','float32[]','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -37,7 +25,7 @@ float64 width
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       x_obj,y_obj,z_obj,xr_obj,yr_obj,zr_obj,w_obj,x_gripper,y_gripper,z_gripper,xr_gripper,yr_gripper,zr_gripper,w_gripper,width
+       bl_to_obj_matr,obj_to_gripper_aa_vector,width
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -46,51 +34,15 @@ float64 width
     if args or kwds:
       super(MoveAllRequest, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.x_obj is None:
-        self.x_obj = 0.
-      if self.y_obj is None:
-        self.y_obj = 0.
-      if self.z_obj is None:
-        self.z_obj = 0.
-      if self.xr_obj is None:
-        self.xr_obj = 0.
-      if self.yr_obj is None:
-        self.yr_obj = 0.
-      if self.zr_obj is None:
-        self.zr_obj = 0.
-      if self.w_obj is None:
-        self.w_obj = 0.
-      if self.x_gripper is None:
-        self.x_gripper = 0.
-      if self.y_gripper is None:
-        self.y_gripper = 0.
-      if self.z_gripper is None:
-        self.z_gripper = 0.
-      if self.xr_gripper is None:
-        self.xr_gripper = 0.
-      if self.yr_gripper is None:
-        self.yr_gripper = 0.
-      if self.zr_gripper is None:
-        self.zr_gripper = 0.
-      if self.w_gripper is None:
-        self.w_gripper = 0.
+      if self.bl_to_obj_matr is None:
+        self.bl_to_obj_matr = []
+      if self.obj_to_gripper_aa_vector is None:
+        self.obj_to_gripper_aa_vector = []
       if self.width is None:
         self.width = 0.
     else:
-      self.x_obj = 0.
-      self.y_obj = 0.
-      self.z_obj = 0.
-      self.xr_obj = 0.
-      self.yr_obj = 0.
-      self.zr_obj = 0.
-      self.w_obj = 0.
-      self.x_gripper = 0.
-      self.y_gripper = 0.
-      self.z_gripper = 0.
-      self.xr_gripper = 0.
-      self.yr_gripper = 0.
-      self.zr_gripper = 0.
-      self.w_gripper = 0.
+      self.bl_to_obj_matr = []
+      self.obj_to_gripper_aa_vector = []
       self.width = 0.
 
   def _get_types(self):
@@ -105,8 +57,15 @@ float64 width
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self
-      buff.write(_struct_15d.pack(_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper, _x.width))
+      length = len(self.bl_to_obj_matr)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(struct.pack(pattern, *self.bl_to_obj_matr))
+      length = len(self.obj_to_gripper_aa_vector)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(struct.pack(pattern, *self.obj_to_gripper_aa_vector))
+      buff.write(_struct_f.pack(self.width))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -117,10 +76,23 @@ float64 width
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 120
-      (_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper, _x.width,) = _struct_15d.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.bl_to_obj_matr = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.obj_to_gripper_aa_vector = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (self.width,) = _struct_f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -133,8 +105,15 @@ float64 width
     :param numpy: numpy python module
     """
     try:
-      _x = self
-      buff.write(_struct_15d.pack(_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper, _x.width))
+      length = len(self.bl_to_obj_matr)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(self.bl_to_obj_matr.tostring())
+      length = len(self.obj_to_gripper_aa_vector)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sf'%length
+      buff.write(self.obj_to_gripper_aa_vector.tostring())
+      buff.write(_struct_f.pack(self.width))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -146,16 +125,29 @@ float64 width
     """
     try:
       end = 0
-      _x = self
       start = end
-      end += 120
-      (_x.x_obj, _x.y_obj, _x.z_obj, _x.xr_obj, _x.yr_obj, _x.zr_obj, _x.w_obj, _x.x_gripper, _x.y_gripper, _x.z_gripper, _x.xr_gripper, _x.yr_gripper, _x.zr_gripper, _x.w_gripper, _x.width,) = _struct_15d.unpack(str[start:end])
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.bl_to_obj_matr = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.obj_to_gripper_aa_vector = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
+      start = end
+      end += 4
+      (self.width,) = _struct_f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_15d = struct.Struct("<15d")
+_struct_f = struct.Struct("<f")
 """autogenerated by genpy from grasping_controller/MoveAllResponse.msg. Do not edit."""
 import sys
 python3 = True if sys.hexversion > 0x03000000 else False
@@ -257,6 +249,6 @@ _struct_I = genpy.struct_I
 _struct_q = struct.Struct("<q")
 class MoveAll(object):
   _type          = 'grasping_controller/MoveAll'
-  _md5sum = 'f78f45f7e98b195bdcd2e68ec6a6f693'
+  _md5sum = '073c3e3dacd545cf3b5e9c386b6d1216'
   _request_class  = MoveAllRequest
   _response_class = MoveAllResponse

@@ -7,36 +7,11 @@
 ;//! \htmlinclude MoveIRB120-request.msg.html
 
 (cl:defclass <MoveIRB120-request> (roslisp-msg-protocol:ros-message)
-  ((joint_1
-    :reader joint_1
-    :initarg :joint_1
-    :type cl:float
-    :initform 0.0)
-   (joint_2
-    :reader joint_2
-    :initarg :joint_2
-    :type cl:float
-    :initform 0.0)
-   (joint_3
-    :reader joint_3
-    :initarg :joint_3
-    :type cl:float
-    :initform 0.0)
-   (joint_4
-    :reader joint_4
-    :initarg :joint_4
-    :type cl:float
-    :initform 0.0)
-   (joint_5
-    :reader joint_5
-    :initarg :joint_5
-    :type cl:float
-    :initform 0.0)
-   (joint_6
-    :reader joint_6
-    :initarg :joint_6
-    :type cl:float
-    :initform 0.0))
+  ((joint_values
+    :reader joint_values
+    :initarg :joint_values
+    :type (cl:vector cl:float)
+   :initform (cl:make-array 0 :element-type 'cl:float :initial-element 0.0)))
 )
 
 (cl:defclass MoveIRB120-request (<MoveIRB120-request>)
@@ -47,38 +22,18 @@
   (cl:unless (cl:typep m 'MoveIRB120-request)
     (roslisp-msg-protocol:msg-deprecation-warning "using old message class name grasping_controller-srv:<MoveIRB120-request> is deprecated: use grasping_controller-srv:MoveIRB120-request instead.")))
 
-(cl:ensure-generic-function 'joint_1-val :lambda-list '(m))
-(cl:defmethod joint_1-val ((m <MoveIRB120-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader grasping_controller-srv:joint_1-val is deprecated.  Use grasping_controller-srv:joint_1 instead.")
-  (joint_1 m))
-
-(cl:ensure-generic-function 'joint_2-val :lambda-list '(m))
-(cl:defmethod joint_2-val ((m <MoveIRB120-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader grasping_controller-srv:joint_2-val is deprecated.  Use grasping_controller-srv:joint_2 instead.")
-  (joint_2 m))
-
-(cl:ensure-generic-function 'joint_3-val :lambda-list '(m))
-(cl:defmethod joint_3-val ((m <MoveIRB120-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader grasping_controller-srv:joint_3-val is deprecated.  Use grasping_controller-srv:joint_3 instead.")
-  (joint_3 m))
-
-(cl:ensure-generic-function 'joint_4-val :lambda-list '(m))
-(cl:defmethod joint_4-val ((m <MoveIRB120-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader grasping_controller-srv:joint_4-val is deprecated.  Use grasping_controller-srv:joint_4 instead.")
-  (joint_4 m))
-
-(cl:ensure-generic-function 'joint_5-val :lambda-list '(m))
-(cl:defmethod joint_5-val ((m <MoveIRB120-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader grasping_controller-srv:joint_5-val is deprecated.  Use grasping_controller-srv:joint_5 instead.")
-  (joint_5 m))
-
-(cl:ensure-generic-function 'joint_6-val :lambda-list '(m))
-(cl:defmethod joint_6-val ((m <MoveIRB120-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader grasping_controller-srv:joint_6-val is deprecated.  Use grasping_controller-srv:joint_6 instead.")
-  (joint_6 m))
+(cl:ensure-generic-function 'joint_values-val :lambda-list '(m))
+(cl:defmethod joint_values-val ((m <MoveIRB120-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader grasping_controller-srv:joint_values-val is deprecated.  Use grasping_controller-srv:joint_values instead.")
+  (joint_values m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <MoveIRB120-request>) ostream)
   "Serializes a message object of type '<MoveIRB120-request>"
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'joint_1))))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'joint_values))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:let ((bits (roslisp-utils:encode-double-float-bits ele)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -86,55 +41,19 @@
     (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'joint_2))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'joint_3))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'joint_4))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'joint_5))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'joint_6))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream)))
+   (cl:slot-value msg 'joint_values))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <MoveIRB120-request>) istream)
   "Deserializes a message object of type '<MoveIRB120-request>"
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'joint_values) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'joint_values)))
+    (cl:dotimes (i __ros_arr_len)
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -144,57 +63,7 @@
       (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'joint_1) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'joint_2) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'joint_3) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'joint_4) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'joint_5) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'joint_6) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:setf (cl:aref vals i) (roslisp-utils:decode-double-float-bits bits))))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<MoveIRB120-request>)))
@@ -205,34 +74,24 @@
   "grasping_controller/MoveIRB120Request")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<MoveIRB120-request>)))
   "Returns md5sum for a message object of type '<MoveIRB120-request>"
-  "0efeb31429421373c6a962d15e843a72")
+  "f1066544fd7fbd13d03469c45f70c4b4")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'MoveIRB120-request)))
   "Returns md5sum for a message object of type 'MoveIRB120-request"
-  "0efeb31429421373c6a962d15e843a72")
+  "f1066544fd7fbd13d03469c45f70c4b4")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<MoveIRB120-request>)))
   "Returns full string definition for message of type '<MoveIRB120-request>"
-  (cl:format cl:nil "float64 joint_1~%float64 joint_2~%float64 joint_3~%float64 joint_4~%float64 joint_5~%float64 joint_6~%~%~%"))
+  (cl:format cl:nil "float64[] joint_values~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'MoveIRB120-request)))
   "Returns full string definition for message of type 'MoveIRB120-request"
-  (cl:format cl:nil "float64 joint_1~%float64 joint_2~%float64 joint_3~%float64 joint_4~%float64 joint_5~%float64 joint_6~%~%~%"))
+  (cl:format cl:nil "float64[] joint_values~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <MoveIRB120-request>))
   (cl:+ 0
-     8
-     8
-     8
-     8
-     8
-     8
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'joint_values) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <MoveIRB120-request>))
   "Converts a ROS message object to a list"
   (cl:list 'MoveIRB120-request
-    (cl:cons ':joint_1 (joint_1 msg))
-    (cl:cons ':joint_2 (joint_2 msg))
-    (cl:cons ':joint_3 (joint_3 msg))
-    (cl:cons ':joint_4 (joint_4 msg))
-    (cl:cons ':joint_5 (joint_5 msg))
-    (cl:cons ':joint_6 (joint_6 msg))
+    (cl:cons ':joint_values (joint_values msg))
 ))
 ;//! \htmlinclude MoveIRB120-response.msg.html
 
@@ -291,10 +150,10 @@
   "grasping_controller/MoveIRB120Response")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<MoveIRB120-response>)))
   "Returns md5sum for a message object of type '<MoveIRB120-response>"
-  "0efeb31429421373c6a962d15e843a72")
+  "f1066544fd7fbd13d03469c45f70c4b4")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'MoveIRB120-response)))
   "Returns md5sum for a message object of type 'MoveIRB120-response"
-  "0efeb31429421373c6a962d15e843a72")
+  "f1066544fd7fbd13d03469c45f70c4b4")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<MoveIRB120-response>)))
   "Returns full string definition for message of type '<MoveIRB120-response>"
   (cl:format cl:nil "int64 error~%~%~%~%"))
