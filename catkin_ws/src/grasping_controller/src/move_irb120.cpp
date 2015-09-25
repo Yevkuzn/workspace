@@ -4,6 +4,8 @@
 #include <actionlib/client/simple_action_client.h>
 #include "grasping_controller/MoveIRB120.h"
 
+//TODO: refactoring + set first point to current position
+
 typedef actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction > TrajClient;
 
 class RobotArm
