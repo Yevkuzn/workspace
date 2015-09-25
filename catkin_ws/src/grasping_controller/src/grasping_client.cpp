@@ -8,7 +8,6 @@
 
 std::vector<grasping_controller::MoveAll::Request> readFile(char* fileName)
 {
-    //TODO: when transformation is computed - change the order of in to correct
     FILE* f;
     std::vector<grasping_controller::MoveAll::Request> res;
     f = fopen(fileName, "r");
